@@ -69,7 +69,7 @@ public class TeacherServiceTest {
     }
 
     @Test
-    public void update() {
+    public void updateNotExistingTeacher() {
         Teacher updatedTeacher = new Teacher("Edwin", "Montoya");
         TeacherDto teacherDto = TeacherDto.builder()
                 .firstName("Edwin")
@@ -78,6 +78,18 @@ public class TeacherServiceTest {
         when(teacherRepository.save(updatedTeacher)).thenReturn(updatedTeacher);
         assertEquals(updatedTeacher, teacherService.update(teacherDto, 1L));
         System.out.println(teacherService.update(teacherDto, 1L));
+    }
+
+    @Test
+    public void updateExistingTeacher() {
+        Teacher updatedTeacher = new Teacher("Edwin", "Montoya");
+        TeacherDto teacherDto = TeacherDto.builder()
+                .firstName("Edwin")
+                .lastName("Montoya").build();
+        when(teacherRepository.findById(1L)).thenReturn(Optional.of(updatedTeacher));
+        when(teacherRepository.save(updatedTeacher)).thenReturn(updatedTeacher);
+        assertEquals(updatedTeacher, teacherService.update(teacherDto, 1L));
+        assertEquals(updatedTeacher.getLastName(), teacherService.update(teacherDto, 1L).getLastName());
     }
 
     @Test

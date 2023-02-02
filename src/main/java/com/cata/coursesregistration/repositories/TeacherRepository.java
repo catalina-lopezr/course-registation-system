@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
     public Teacher findByFirstName(String firstName);
+    public Teacher findByLastName(String lastName);
 }
