@@ -1,6 +1,8 @@
 package com.cata.coursesregistration.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -9,6 +11,8 @@ import java.util.List;
 import java.util.Set;
 
 @Data
+@AllArgsConstructor
+@Builder
 @Entity
 public class Student {
 
@@ -31,11 +35,5 @@ public class Student {
     private List<Grade> grades;
 
     public Student() {
-    }
-
-    public Student(String firstName, String lastName, int semester) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.semester = semester;
     }
 }

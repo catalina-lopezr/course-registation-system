@@ -1,25 +1,28 @@
 package com.cata.coursesregistration.services.impl;
 
 import com.cata.coursesregistration.domain.Student;
+import com.cata.coursesregistration.domain.Class;
 import com.cata.coursesregistration.dtos.StudentDto;
 import com.cata.coursesregistration.mappers.StudentMapper;
+import com.cata.coursesregistration.repositories.ClassRepository;
 import com.cata.coursesregistration.repositories.StudentRepository;
 import com.cata.coursesregistration.services.StudentService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
+    private final ClassRepository classRepository;
 
-    public StudentServiceImpl(StudentRepository studentRepository, StudentMapper studentMapper) {
+    public StudentServiceImpl(StudentRepository studentRepository, StudentMapper studentMapper,
+                              ClassRepository classRepository) {
         this.studentRepository = studentRepository;
         this.studentMapper = studentMapper;
+        this.classRepository = classRepository;
     }
 
     @Override
@@ -66,7 +69,22 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void delete(Long id) {
+    public String delete(Long id) {
+        studentRepository.findById(id).orElseThrow();
         studentRepository.deleteById(id);
+        return "Student " + id + " successfully deleted";
+    }
+
+    @Override
+    public Student addClasses(Long id, List<Long> classes){
+        Student student = studentRepository.findById(id).orElseThrow();
+        Set<Class> newClasses = new HashSet<>();
+        for (Long i : classes){
+            Class newClass = classRepository.findById(i).orElseThrow();
+            newClasses.add(newClass);
+        }
+        student.setClasses(newClasses);
+        studentRepository.save(student);
+        return student;
     }
 }

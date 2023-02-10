@@ -15,5 +15,7 @@ public interface StudentService {
 
     Student update(StudentDto student, Long id);
 
-    void delete(Long id);
+    String delete(Long id);
+
+    Student addClasses(Long id, List<Long> classes);
 }

@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -93,7 +94,16 @@ public class TeacherServiceTest {
     }
 
     @Test
-    public void delete() {
-        assertEquals("Teacher 1 successfully deleted", teacherService.delete(1L));
+    public void deleteTeacherPresent() {
+        Teacher teacher = new Teacher("Edwin", "Montoya");
+        when(teacherRepository.findById(1L)).thenReturn(Optional.of(teacher));
+        assertEquals("Teacher 1 successfully deleted",
+                teacherService.delete(1L));
     }
+
+//    @Test
+//    public void deleteTeacherNotPresent() {
+//        assertEquals(new NoSuchElementException(),
+//                teacherService.delete(1L));
+//    }
 }

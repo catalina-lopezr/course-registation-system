@@ -66,7 +66,7 @@ public class TeacherMVCTest {
     }
 
     @Test
-    public void getAllRecords_success() throws Exception {
+    public void getAllTeachers_success() throws Exception {
         when(teacherService.getAll()).thenReturn(teacherDtos);
         assertIterableEquals(teacherDtos, teacherService.getAll());
         mockMvc.perform(MockMvcRequestBuilders
@@ -91,7 +91,7 @@ public class TeacherMVCTest {
     }
 
     @Test
-    public void createRecord_success() throws Exception {
+    public void createTeacher_success() throws Exception {
         Teacher teacher = teacherMapper.toBo(teacherDtos.get(2));
 
         when(teacherService.saveNew(teacherDtos.get(2))).thenReturn(teacher);
@@ -108,7 +108,7 @@ public class TeacherMVCTest {
     }
 
     @Test
-    public void updatePatientRecord_success() throws Exception {
+    public void updateTeacher_success() throws Exception {
 //        TeacherDto updatedTeacher = new TeacherDto("Edwin", "Cardona");
         TeacherDto updatedTeacher = TeacherDto.builder().firstName("Edwin").lastName("Cardona").build();
         when(teacherService.getById(1L)).thenReturn(teacherDtos.get(1));
@@ -126,7 +126,7 @@ public class TeacherMVCTest {
     }
 
     @Test
-    public void deletePatientById_success() throws Exception {
+    public void deleteTeacherById_success() throws Exception {
         when(teacherService.getById(1L)).thenReturn(teacherDtos.get(1));
 
         mockMvc.perform(MockMvcRequestBuilders

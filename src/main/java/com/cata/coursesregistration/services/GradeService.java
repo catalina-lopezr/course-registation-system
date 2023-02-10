@@ -15,5 +15,5 @@ public interface GradeService {
 
     Grade update(GradeDto newGrade, Long id);
 
-    void delete(Long id);
+    String delete(Long id);
 }

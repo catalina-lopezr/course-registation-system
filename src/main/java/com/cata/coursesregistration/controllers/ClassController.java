@@ -32,12 +32,12 @@ public class ClassController {
     }
 
     @PutMapping("/{id}")
-    public Class replaceClass(@RequestBody ClassDto newClass, @PathVariable Long id) {
+    public Class updateClass(@RequestBody ClassDto newClass, @PathVariable Long id) {
         return classService.update(newClass, id);
     }
 
     @DeleteMapping("/{id}")
-    void deleteClass(@PathVariable Long id) {
-        classService.delete(id);
+    String deleteClass(@PathVariable Long id) {
+        return classService.delete(id);
     }
 }

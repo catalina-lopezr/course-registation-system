@@ -94,7 +94,9 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public void delete(Long id) {
+    public String delete(Long id) {
+        classRepository.findById(id).orElseThrow();
         classRepository.deleteById(id);
+        return "Class " + id + " successfully deleted";
     }
 }

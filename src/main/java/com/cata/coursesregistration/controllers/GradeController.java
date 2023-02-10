@@ -33,12 +33,13 @@ public class GradeController {
     }
 
     @PutMapping("/{id}")
-    public Grade replaceGrade(@RequestBody GradeDto newGrade, @PathVariable Long id) {
+    public Grade updateGrade(@RequestBody GradeDto newGrade, @PathVariable Long id) {
         return gradeService.update(newGrade, id);
     }
 
     @DeleteMapping("/{id}")
-    void deleteGrade(@PathVariable Long id) {
+    public String deleteGrade(@PathVariable Long id) {
         gradeService.delete(id);
+        return "Grade " + id + " successfully deleted";
     }
 }

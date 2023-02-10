@@ -11,5 +11,5 @@ public interface CourseService {
     CourseDto getById(Long id);
     Course saveNew(CourseDto course);
     Course update(CourseDto course, Long id);
-    void delete(Long id);
+    String delete(Long id);
 }

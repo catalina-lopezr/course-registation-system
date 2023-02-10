@@ -8,6 +8,7 @@ import com.cata.coursesregistration.mappers.GradeMapper;
 import com.cata.coursesregistration.repositories.ClassRepository;
 import com.cata.coursesregistration.repositories.GradeRepository;
 import com.cata.coursesregistration.repositories.StudentRepository;
+import com.cata.coursesregistration.repositories.TeacherRepository;
 import com.cata.coursesregistration.services.GradeService;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +22,15 @@ public class GradeServiceImpl implements GradeService {
     private final GradeMapper gradeMapper;
     private final StudentRepository studentRepository;
     private final ClassRepository classRepository;
+    private final TeacherRepository teacherRepository;
 
-    public GradeServiceImpl(GradeRepository gradeRepository, GradeMapper gradeMapper, StudentRepository studentRepository, ClassRepository classRepository) {
+    public GradeServiceImpl(GradeRepository gradeRepository, GradeMapper gradeMapper, StudentRepository studentRepository, ClassRepository classRepository,
+                            TeacherRepository teacherRepository) {
         this.gradeRepository = gradeRepository;
         this.gradeMapper = gradeMapper;
         this.studentRepository = studentRepository;
         this.classRepository = classRepository;
+        this.teacherRepository = teacherRepository;
     }
 
     @Override
@@ -92,7 +96,9 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public void delete(Long id) {
+    public String delete(Long id) {
+        gradeRepository.findById(id).orElseThrow();
         gradeRepository.deleteById(id);
+        return "Grade " + id + " successfully deleted";
     }
 }

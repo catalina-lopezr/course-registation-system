@@ -1,11 +1,15 @@
 package com.cata.coursesregistration.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
+@Builder
 @Entity
 public class Grade {
     @Id
@@ -30,10 +34,4 @@ public class Grade {
     public Grade() {
     }
 
-    public Grade(float value, Class cl, Student student, String yearSemester) {
-        this.value = value;
-        this.cl = cl;
-        this.student = student;
-        this.yearSemester = yearSemester;
-    }
 }

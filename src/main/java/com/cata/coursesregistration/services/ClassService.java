@@ -15,5 +15,5 @@ public interface ClassService {
 
     Class update(ClassDto cl, Long id);
 
-    void delete(Long id);
+    String delete(Long id);
 }

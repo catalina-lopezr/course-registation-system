@@ -58,7 +58,7 @@ public class TeacherServiceImpl implements TeacherService {
                     updatedTeacher.setLastUpdated(LocalDateTime.now());
                     return teacherRepository.save(updatedTeacher);
                 })
-                .orElseGet(() -> {
+                .orElseGet(() -> { //Bad practice
                     Teacher newTeacher = teacherMapper.toBo(teacher);
                     newTeacher.setCreatedBy("cata");
                     newTeacher.setCreatedDate(LocalDateTime.now());
@@ -68,6 +68,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public String delete(Long id) {
+        teacherRepository.findById(id).orElseThrow();
         teacherRepository.deleteById(id);
         return "Teacher " + id + " successfully deleted";
     }
